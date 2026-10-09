@@ -4,8 +4,8 @@ class Elemento{
 }
 
 class Hogar inherits Elemento{
-    var property mugre = 0
-    var property confort = 0
+    var property mugre
+    var property confort
 
     override method esBueno(){
         return mugre <= confort / 2
@@ -13,10 +13,18 @@ class Hogar inherits Elemento{
 }
 
 class Huerta inherits Elemento{
-    var property capacidadProductiva = 0 //kilos por mes
-    var property nivelDeProduccion = 0
+    var property capacidadProductiva //kilos por mes
+    var property nivelDeProduccion
 
     override method esBueno(){
         return capacidadProductiva > nivelDeProduccion
+    }
+}
+
+class Mascota inherits Elemento{
+    var property salud
+
+    override method esBueno(){
+        return salud > 250
     }
 }

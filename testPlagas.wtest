@@ -39,3 +39,20 @@ describe "Test sobre huertas"{
         assert.notThat(huertaMasOMenos.esBueno())
     }
 }
+
+describe "Test sobre mascotas"{
+    const mascotaBuena = new Mascota(salud = 300 )
+    const mascotaMala = new Mascota(salud = 100)
+    const mascotaMasOMenos = new Mascota(salud = 250)
+    test "La mascota es buena, ya que su salud supera las 250 unidades"{
+        assert.that(mascotaBuena.esBueno())
+    }
+
+    test "La mascota es mala, ya que su salud es inferior a 250 unidades"{
+        assert.notThat(mascotaMala.esBueno())
+    }
+
+    test "La mascota es mala, ya que su salud es de 250 unidades"{
+        assert.notThat(mascotaMasOMenos.esBueno())
+    }
+}
