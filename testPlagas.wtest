@@ -17,3 +17,20 @@ describe "Tests sobre hogares" {
         assert.notThat(hogarMasOMenos.esBueno())
     }
 }
+
+describe "Test sobre huertas"{
+    const huertaBuena = new Huerta(capacidadProductiva = 150, nivelDeProduccion = 120)
+    const huertaMala = new Huerta(capacidadProductiva = 100, nivelDeProduccion = 120)
+    const huertaMasOMenos = new Huerta(capacidadProductiva = 120, nivelDeProduccion = 120)
+    test "La huerta es buena, ya que su capacidad de producción supera el nivel de produccion que se espera de todas las huertas"{
+        assert.that(huertaBuena.esBueno())
+    }
+
+    test "La huerta es mala, ya que su capacidad de producción es inferior a el nivel de produccion que se espera de todas las huertas"{
+        assert.notThat(huertaMala.esBueno())
+    }
+
+    test "La huerta es mala, ya que su capacidad de producción es igual a el nivel de produccion que se espera de todas las huertas"{
+        assert.notThat(huertaMasOMenos.esBueno())
+    }
+}
