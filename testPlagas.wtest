@@ -1,12 +1,17 @@
 import elementos.*
 
 describe "Tests sobre hogares" {
-    const hogarBueno = new Hogar(mugre = 1, confort = 2)
+    const hogarBueno = new Hogar(mugre = 1, confort = 3)
+    const hogarDecente = new Hogar(mugre = 1, confort = 2)
     const hogarMalo = new Hogar(mugre = 3, confort = 2)
     const hogarMasOMenos = new Hogar(mugre = 2, confort = 2)
     
-    test "El hogar es bueno, ya que su nivel de mugre es la mitad del confort que ofrece"{
+    test "El hogar es bueno, ya que su nivel de mugre es menos de la mitad del confort que ofrece"{
         assert.that(hogarBueno.esBueno())
+    }
+
+    test "El hogar es bueno, ya que su nivel de mugre es la mitad del confort que ofrece"{
+        assert.that(hogarDecente.esBueno())
     }
 
     test "El hogar es malo, ya que su nivel de mugre es mas de la mitad del confort que ofrece"{
