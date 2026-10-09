@@ -1,8 +1,22 @@
 import elementos.*
 
 describe "Tests del hogar" {
+    const hogar = new Hogar(mugre = 0, confort = 0)
+    const hogarBueno = new Hogar(mugre = 1, confort = 2)
+    const hogarMalo = new Hogar(mugre = 3, confort = 2)
     test "Nivel de mugre en hogar es 0"{
-        const hogar = new Hogar()
-        assert.equals(0, hogar.nivelDelMugre())
+        assert.equals(0, hogar.mugre())
+    }
+
+    test "Nivel de confort en hogar es 0"{
+        assert.equals(0, hogar.confort())
+    }
+
+    test "El hogar es bueno, ya que su nivel de mugre es la mitad del confort que ofrece"{
+        assert.that(hogarBueno.esBueno())
+    }
+
+    test "El hogar es malo, ya que su nivel de mugre es mas de la mitad del confort que ofrece"{
+        assert.notThat(hogarMalo.esBueno())
     }
 }
