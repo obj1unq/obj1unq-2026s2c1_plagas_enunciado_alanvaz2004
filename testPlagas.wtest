@@ -64,7 +64,7 @@ describe "Tests sobre mascotas"{
 describe "Tests sobre barrios"{
     const barrio = new Barrio()
     
-    test "El barrio es copado"{
+    test "El barrio es copado, ya que hay mas elementos buenos(4) que no-buenos(3) "{
         barrio.agregarElemento(hogarBueno)
         barrio.agregarElemento(huertaBuena)
         barrio.agregarElemento(hogarDecente)
@@ -73,5 +73,26 @@ describe "Tests sobre barrios"{
         barrio.agregarElemento(hogarMalo)
         barrio.agregarElemento(mascotaMala)
         assert.that(barrio.esCopado())
+    }
+
+    test "El barrio no es copado, ya que hay menos elementos buenos(3) que no-buenos(4) "{
+        barrio.agregarElemento(hogarBueno)
+        barrio.agregarElemento(huertaBuena)
+        barrio.agregarElemento(mascotaBuena)
+        barrio.agregarElemento(huertaMala)
+        barrio.agregarElemento(hogarMalo)
+        barrio.agregarElemento(mascotaMala)
+        barrio.agregarElemento(mascotaMala)
+        assert.notThat(barrio.esCopado())
+    }
+
+    test "El barrio no es copado, ya que hay igual de elementos buenos(3) que no-buenos(3) "{
+        barrio.agregarElemento(hogarBueno)
+        barrio.agregarElemento(huertaBuena)
+        barrio.agregarElemento(mascotaBuena)
+        barrio.agregarElemento(huertaMala)
+        barrio.agregarElemento(hogarMalo)
+        barrio.agregarElemento(mascotaMala)
+        assert.notThat(barrio.esCopado())
     }
 }
