@@ -1,0 +1,8 @@
+import elementos.*
+
+describe "Tests del hogar" {
+    test "Nivel de mugre en hogar es 0"{
+        const hogar = new Hogar()
+        assert.equals(0, hogar.nivelDelMugre())
+    }
+}
