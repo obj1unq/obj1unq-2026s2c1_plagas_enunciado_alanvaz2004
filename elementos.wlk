@@ -37,6 +37,11 @@ class Barrio{
     }
 
     method esCopado(){
-        return //la condición es que tenga más elementos buenos que no-buenos.
+        return  self.elementosBuenos() > (elementos.size() / 2) //la condición es que tenga más elementos buenos que no-buenos.
+    }
+
+    method elementosBuenos(){
+        const buenos = elementos.filter{elemento => elemento.esBueno()}
+        return buenos.size() 
     }
 }

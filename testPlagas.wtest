@@ -1,10 +1,18 @@
 import elementos.*
 
-describe "Tests sobre hogares" {
     const hogarBueno = new Hogar(mugre = 1, confort = 3)
     const hogarDecente = new Hogar(mugre = 1, confort = 2)
     const hogarMalo = new Hogar(mugre = 3, confort = 2)
     const hogarMasOMenos = new Hogar(mugre = 2, confort = 2)
+
+    const huertaBuena = new Huerta(capacidadProductiva = 150, nivelDeProduccion = 120)
+    const huertaMala = new Huerta(capacidadProductiva = 100, nivelDeProduccion = 120)
+    const huertaMasOMenos = new Huerta(capacidadProductiva = 120, nivelDeProduccion = 120)
+
+    const mascotaBuena = new Mascota(salud = 300 )
+    const mascotaMala = new Mascota(salud = 100)
+    const mascotaMasOMenos = new Mascota(salud = 250)
+describe "Tests sobre hogares" {
     
     test "El hogar es bueno, ya que su nivel de mugre es menos de la mitad del confort que ofrece"{
         assert.that(hogarBueno.esBueno())
@@ -23,10 +31,8 @@ describe "Tests sobre hogares" {
     }
 }
 
-describe "Test sobre huertas"{
-    const huertaBuena = new Huerta(capacidadProductiva = 150, nivelDeProduccion = 120)
-    const huertaMala = new Huerta(capacidadProductiva = 100, nivelDeProduccion = 120)
-    const huertaMasOMenos = new Huerta(capacidadProductiva = 120, nivelDeProduccion = 120)
+describe "Tests sobre huertas"{
+    
     test "La huerta es buena, ya que su capacidad de producción supera el nivel de produccion que se espera de todas las huertas"{
         assert.that(huertaBuena.esBueno())
     }
@@ -40,10 +46,8 @@ describe "Test sobre huertas"{
     }
 }
 
-describe "Test sobre mascotas"{
-    const mascotaBuena = new Mascota(salud = 300 )
-    const mascotaMala = new Mascota(salud = 100)
-    const mascotaMasOMenos = new Mascota(salud = 250)
+describe "Tests sobre mascotas"{
+    
     test "La mascota es buena, ya que su salud supera las 250 unidades"{
         assert.that(mascotaBuena.esBueno())
     }
@@ -54,5 +58,20 @@ describe "Test sobre mascotas"{
 
     test "La mascota es mala, ya que su salud es de 250 unidades"{
         assert.notThat(mascotaMasOMenos.esBueno())
+    }
+}
+
+describe "Tests sobre barrios"{
+    const barrio = new Barrio()
+    
+    test "El barrio es copado"{
+        barrio.agregarElemento(hogarBueno)
+        barrio.agregarElemento(huertaBuena)
+        barrio.agregarElemento(hogarDecente)
+        barrio.agregarElemento(mascotaBuena)
+        barrio.agregarElemento(huertaMala)
+        barrio.agregarElemento(hogarMalo)
+        barrio.agregarElemento(mascotaMala)
+        assert.that(barrio.esCopado())
     }
 }
