@@ -28,3 +28,15 @@ class Mascota inherits Elemento{
         return salud > 250
     }
 }
+
+class Barrio{
+    const elementos = []
+
+    method agregarElemento(elemento){
+        elementos.add(elemento)
+    }
+
+    method esCopado(){
+        return //la condición es que tenga más elementos buenos que no-buenos.
+    }
+}
