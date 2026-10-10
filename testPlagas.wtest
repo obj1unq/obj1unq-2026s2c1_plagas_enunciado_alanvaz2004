@@ -1,0 +1,99 @@
+import plagas.*
+import elementos.*
+
+    const hogarBueno = new Hogar(mugre = 1, confort = 3)
+    const hogarDecente = new Hogar(mugre = 1, confort = 2)
+    const hogarMalo = new Hogar(mugre = 3, confort = 2)
+    const hogarMasOMenos = new Hogar(mugre = 2, confort = 2)
+
+    const huertaBuena = new Huerta(capacidadProductiva = 150, nivelDeProduccion = 120)
+    const huertaMala = new Huerta(capacidadProductiva = 100, nivelDeProduccion = 120)
+    const huertaMasOMenos = new Huerta(capacidadProductiva = 120, nivelDeProduccion = 120)
+
+    const mascotaBuena = new Mascota(salud = 300 )
+    const mascotaMala = new Mascota(salud = 100)
+    const mascotaMasOMenos = new Mascota(salud = 250)
+describe "Tests sobre hogares" {
+    
+    test "El hogar es bueno, ya que su nivel de mugre es menos de la mitad del confort que ofrece"{
+        assert.that(hogarBueno.esBueno())
+    }
+
+    test "El hogar es bueno, ya que su nivel de mugre es la mitad del confort que ofrece"{
+        assert.that(hogarDecente.esBueno())
+    }
+
+    test "El hogar es malo, ya que su nivel de mugre es mas de la mitad del confort que ofrece"{
+        assert.notThat(hogarMalo.esBueno())
+    }
+
+    test "El hogar es malo, ya que su nivel de mugre es igual que el confort que ofrece"{
+        assert.notThat(hogarMasOMenos.esBueno())
+    }
+}
+
+describe "Tests sobre huertas"{
+    
+    test "La huerta es buena, ya que su capacidad de producción supera el nivel de produccion que se espera de todas las huertas"{
+        assert.that(huertaBuena.esBueno())
+    }
+
+    test "La huerta es mala, ya que su capacidad de producción es inferior a el nivel de produccion que se espera de todas las huertas"{
+        assert.notThat(huertaMala.esBueno())
+    }
+
+    test "La huerta es mala, ya que su capacidad de producción es igual a el nivel de produccion que se espera de todas las huertas"{
+        assert.notThat(huertaMasOMenos.esBueno())
+    }
+}
+
+describe "Tests sobre mascotas"{
+    
+    test "La mascota es buena, ya que su salud supera las 250 unidades"{
+        assert.that(mascotaBuena.esBueno())
+    }
+
+    test "La mascota es mala, ya que su salud es inferior a 250 unidades"{
+        assert.notThat(mascotaMala.esBueno())
+    }
+
+    test "La mascota es mala, ya que su salud es de 250 unidades"{
+        assert.notThat(mascotaMasOMenos.esBueno())
+    }
+}
+
+describe "Tests sobre barrios"{
+    const barrio = new Barrio()
+    
+    test "El barrio es copado, ya que hay mas elementos buenos(4) que no-buenos(3) "{
+        barrio.agregarElemento(hogarBueno)
+        barrio.agregarElemento(huertaBuena)
+        barrio.agregarElemento(hogarDecente)
+        barrio.agregarElemento(mascotaBuena)
+        barrio.agregarElemento(huertaMala)
+        barrio.agregarElemento(hogarMalo)
+        barrio.agregarElemento(mascotaMala)
+        assert.that(barrio.esCopado())
+    }
+
+    test "El barrio no es copado, ya que hay menos elementos buenos(3) que no-buenos(4) "{
+        barrio.agregarElemento(hogarBueno)
+        barrio.agregarElemento(huertaBuena)
+        barrio.agregarElemento(mascotaBuena)
+        barrio.agregarElemento(huertaMala)
+        barrio.agregarElemento(hogarMalo)
+        barrio.agregarElemento(mascotaMala)
+        barrio.agregarElemento(mascotaMala)
+        assert.notThat(barrio.esCopado())
+    }
+
+    test "El barrio no es copado, ya que hay igual de elementos buenos(3) que no-buenos(3) "{
+        barrio.agregarElemento(hogarBueno)
+        barrio.agregarElemento(huertaBuena)
+        barrio.agregarElemento(mascotaBuena)
+        barrio.agregarElemento(huertaMala)
+        barrio.agregarElemento(hogarMalo)
+        barrio.agregarElemento(mascotaMala)
+        assert.notThat(barrio.esCopado())
+    }
+}
