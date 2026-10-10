@@ -1,3 +1,4 @@
+import plagas.*
 import elementos.*
 
     const hogarBueno = new Hogar(mugre = 1, confort = 3)
