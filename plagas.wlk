@@ -1,73 +1,51 @@
 class Plaga {
-
-    method poblacion() //cantidad de bichos que la integran
+    var property poblacion //cantidad de bichos que la integran
 
     method nivelDeDaño()
 
-    method transmitirEnfermedades()
+    method puedeTransmitirEnfermedades()
     //Para que cualquier plaga transmita enfermedades, su población debe ser de al menos 10 bichos
 }
 
 class Cucaracha inherits Plaga {
+    var property pesoPromedio
 
-    override method poblacion(){
+    override method nivelDeDaño() = poblacion / 2
 
-    }
-
-    method pesoPromedio(){ 
-
-    }
-
-    override method nivelDeDaño(){
-
-    }
-
-    override method transmitirEnfermedades(){
-
+    override method puedeTransmitirEnfermedades(){
+        return pesoPromedio >= 10
     }
 }
 
 class Pulga inherits Plaga {
 
-    override method poblacion(){
-        
-    }
-
     override method nivelDeDaño(){
 
     }
 
-    override method transmitirEnfermedades(){
+    override method puedeTransmitirEnfermedades(){
         
     }
 }
 
 class Garrapata inherits Plaga {
 
-    override method poblacion(){
-        
-    }
-
     override method nivelDeDaño(){
 
     }
 
-    override method transmitirEnfermedades(){
+    override method puedeTransmitirEnfermedades(){
         
     }
 }
 
 class Mosquito inherits Plaga {
 
-    override method poblacion(){
-        
-    }
-
     override method nivelDeDaño(){
 
     }
 
-    override method transmitirEnfermedades(){
+    override method puedeTransmitirEnfermedades(){
         
     }
 }
