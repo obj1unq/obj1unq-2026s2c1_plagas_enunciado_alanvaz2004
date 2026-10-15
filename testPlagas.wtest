@@ -210,4 +210,11 @@ describe "Test de elementos recibiendo ataques de plagas"{
         mascotaBuena.recibeAtaqueDePlaga(pulgasQueNoTransmiten)
         assert.equals(300, mascotaBuena.salud())
     }
+
+    test "Cucarachas atacan hogar, aumentan su poblacion un 10% y peso promedio en 2"{
+        cucarachasQueTransmiten.ataqueAElemento(hogarBueno)
+        assert.equals(51, hogarBueno.mugre())
+        assert.equals(110, cucarachasQueTransmiten.poblacion())
+        assert.equals(12, cucarachasQueTransmiten.pesoPromedio())
+    }
 }
