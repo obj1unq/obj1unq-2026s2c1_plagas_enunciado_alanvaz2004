@@ -18,33 +18,21 @@ class Cucaracha inherits Plaga {
 
 class Pulga inherits Plaga {
 
-    override method nivelDeDaño(){
+    override method nivelDeDaño() = poblacion * 2
 
-    }
-
-    override method puedeTransmitirEnfermedades(){
-        
-    }
 }
 
 class Garrapata inherits Plaga {
 
-    override method nivelDeDaño(){
+    override method nivelDeDaño() = poblacion * 2
 
-    }
-
-    override method puedeTransmitirEnfermedades(){
-        
-    }
 }
 
 class Mosquito inherits Plaga {
 
-    override method nivelDeDaño(){
-
-    }
+    override method nivelDeDaño() = poblacion
 
     override method puedeTransmitirEnfermedades(){
-        
+        //super() && poblacion / 3
     }
 }

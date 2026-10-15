@@ -18,6 +18,12 @@ import elementos.*
     //Plagas
     const cucarachasQueTransmiten = new Cucaracha(poblacion = 100, pesoPromedio = 10 )
     const cucarachasQueNoTransmiten = new Cucaracha(poblacion = 100, pesoPromedio = 9)
+
+    const pulgasQueTransmiten = new Pulga(poblacion = 70, pesoPromedio = 10)
+    const pulgasQueNoTransmiten = new Pulga(poblacion = 70, pesoPromedio = 9)
+
+    const garrapatasQueTransmiten = new Garrapata(poblacion = 70, pesoPromedio = 10)
+    const garrapatasQueNoTransmiten = new Garrapata(poblacion = 70, pesoPromedio = 9)
 describe "Tests sobre hogares" {
     
     test "El hogar es bueno, ya que su nivel de mugre es menos de la mitad del confort que ofrece"{
@@ -102,7 +108,7 @@ describe "Tests sobre barrios"{
         assert.notThat(barrio.esCopado())
     }
 }
-describe "Tests sobre plagas"{
+describe "Tests sobre plagas"{ //faltan tests que comprueben los niveles de daño
     test "Cucarachas transmiten enfermedades por tener un pesoPromedio de 10"{
         assert.that(cucarachasQueTransmiten.puedeTransmitirEnfermedades() )
     }
@@ -110,4 +116,20 @@ describe "Tests sobre plagas"{
     test "Cucarachas no transmiten enfermedades por tener un pesoPromedio de 9"{
         assert.notThat(cucarachasQueNoTransmiten.puedeTransmitirEnfermedades() )
     }
+
+    test "Pulgas transmiten enfermedades por tener un pesoPromedio de 10"{
+        assert.that(pulgasQueTransmiten.puedeTransmitirEnfermedades() )
+    }
+
+    test "Pulgas no transmiten enfermedades por tener un pesoPromedio de 9"{
+        assert.notThat(pulgasQueNoTransmiten.puedeTransmitirEnfermedades() )
+    }
+
+    test "Garrapatas transmiten enfermedades por tener un pesoPromedio de 10"{
+        assert.that(garrapatasQueTransmiten.puedeTransmitirEnfermedades() )
+    }
+
+    test "Garrapatas no transmiten enfermedades por tener un pesoPromedio de 9"{
+        assert.notThat(garrapatasQueNoTransmiten.puedeTransmitirEnfermedades() )
+    } //deberia simplemente hacer esto sobre la clase plaga para no repetir tanto test??
 }
