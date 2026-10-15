@@ -186,8 +186,18 @@ describe "Test de elementos recibiendo ataques de plagas"{
         assert.equals(136, huertaBuena.capacidadProductiva() )
     }
 
+    test "Huerta recibe ataque de garrapatas que transmiten enfermedades, lo que vuelve su capacidad productiva 126"{
+        huertaBuena.recibeAtaqueDePlaga(garrapatasQueTransmiten)
+        assert.equals(126, huertaBuena.capacidadProductiva() )
+    }
+
     test "Huerta recibe ataque de mosquitos que transmiten enfermedades, lo que vuelve su capacidad productiva 134"{
         huertaBuena.recibeAtaqueDePlaga(mosquitosQueTransmiten)
         assert.equals(134, huertaBuena.capacidadProductiva() )
+    }
+
+    test "Huerta recibe ataque de mosquitos que no transmiten enfermedades, lo que vuelve su capacidad productiva 144"{
+        huertaBuena.recibeAtaqueDePlaga(mosquitosQueNoTransmiten)
+        assert.equals(144.1, huertaBuena.capacidadProductiva() ) //da 144.1 debido a que la poblacion es 59
     }
 }
