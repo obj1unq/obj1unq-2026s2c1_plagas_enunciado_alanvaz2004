@@ -24,6 +24,9 @@ import elementos.*
 
     const garrapatasQueTransmiten = new Garrapata(poblacion = 70, pesoPromedio = 10)
     const garrapatasQueNoTransmiten = new Garrapata(poblacion = 70, pesoPromedio = 9)
+
+    const mosquitosQueTransmiten = new Mosquito(poblacion = 60, pesoPromedio = 12)
+    const mosquitosQueNoTransmiten = new Mosquito(poblacion = 60, pesoPromedio = 10) //no transmite por no ser multiplo de 3
 describe "Tests sobre hogares" {
     
     test "El hogar es bueno, ya que su nivel de mugre es menos de la mitad del confort que ofrece"{
@@ -132,4 +135,12 @@ describe "Tests sobre plagas"{ //faltan tests que comprueben los niveles de dañ
     test "Garrapatas no transmiten enfermedades por tener un pesoPromedio de 9"{
         assert.notThat(garrapatasQueNoTransmiten.puedeTransmitirEnfermedades() )
     } //deberia simplemente hacer esto sobre la clase plaga para no repetir tanto test??
+
+    test "Mosquitos transmiten enfermedades por tener un pesoPromedio de 10"{
+        assert.that(mosquitosQueTransmiten.puedeTransmitirEnfermedades() )
+    }
+
+    test "Mosquitos no transmiten enfermedades por tener un pesoPromedio de 9"{
+        assert.notThat(mosquitosQueNoTransmiten.puedeTransmitirEnfermedades() )
+    } 
 }
