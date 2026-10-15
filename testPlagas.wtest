@@ -200,4 +200,14 @@ describe "Test de elementos recibiendo ataques de plagas"{
         huertaBuena.recibeAtaqueDePlaga(mosquitosQueNoTransmiten)
         assert.equals(144.1, huertaBuena.capacidadProductiva() ) //da 144.1 debido a que la poblacion es 59
     }
+
+    test "Mascota recibe ataque de pulgas que transmiten enfermedades"{
+        mascotaBuena.recibeAtaqueDePlaga(pulgasQueTransmiten)
+        assert.equals(160, mascotaBuena.salud())
+    }
+
+    test "Mascota recibe ataque de pulgas que no transmiten enfermedades(su vida queda igual)"{
+        mascotaBuena.recibeAtaqueDePlaga(pulgasQueNoTransmiten)
+        assert.equals(300, mascotaBuena.salud())
+    }
 }

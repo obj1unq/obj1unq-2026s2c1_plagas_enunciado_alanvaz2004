@@ -44,7 +44,9 @@ class Mascota inherits Elemento{
     }
 
     override method recibeAtaqueDePlaga(plaga){
-        
+        if(plaga.puedeTransmitirEnfermedades()){
+            salud = salud - plaga.nivelDeDaño()
+        }
     }
 }
 
