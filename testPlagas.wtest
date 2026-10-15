@@ -159,3 +159,26 @@ describe "Tests sobre plagas"{
     }
  
 }
+
+describe "Test de elementos recibiendo ataques de plagas"{
+    test "Hogar recibe ataque de cucarachas, lo que vuelve su nivel de mugre 51"{
+        hogarBueno.recibeAtaqueDePlaga(cucarachasQueTransmiten)
+        assert.equals(51, hogarBueno.mugre() )
+    }
+
+    test "Hogar recibe ataque de pulgas, lo que vuelve su nivel de mugre 51"{
+        hogarBueno.recibeAtaqueDePlaga(pulgasQueTransmiten)
+        assert.equals(141, hogarBueno.mugre() )
+    }
+
+    test "Hogar recibe ataque de garrapatas, lo que vuelve su nivel de mugre 51"{
+        hogarBueno.recibeAtaqueDePlaga(garrapatasQueTransmiten)
+        assert.equals(141, hogarBueno.mugre() )
+    }
+
+    test "Hogar recibe ataque de mosquitos, lo que vuelve su nivel de mugre 51"{
+        hogarBueno.recibeAtaqueDePlaga(mosquitosQueTransmiten)
+        assert.equals(61, hogarBueno.mugre() )
+    }
+    
+}

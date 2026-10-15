@@ -1,6 +1,9 @@
+import plagas.*
 class Elemento{
 
     method esBueno()
+
+    method recibeAtaqueDePlaga(plaga)
 }
 
 class Hogar inherits Elemento{
@@ -9,6 +12,10 @@ class Hogar inherits Elemento{
 
     override method esBueno(){
         return mugre <= confort / 2
+    }
+
+    override method recibeAtaqueDePlaga(plaga){
+        mugre += plaga.nivelDeDaño()
     }
 }
 
@@ -19,6 +26,10 @@ class Huerta inherits Elemento{
     override method esBueno(){
         return capacidadProductiva > nivelDeProduccion
     }
+
+    override method recibeAtaqueDePlaga(plaga){
+        
+    }
 }
 
 class Mascota inherits Elemento{
@@ -26,6 +37,10 @@ class Mascota inherits Elemento{
 
     override method esBueno(){
         return salud > 250
+    }
+
+    override method recibeAtaqueDePlaga(plaga){
+        
     }
 }
 
