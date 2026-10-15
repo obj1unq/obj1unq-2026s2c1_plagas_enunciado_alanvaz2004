@@ -1,6 +1,7 @@
 import plagas.*
 import elementos.*
 
+    //Elementos
     const hogarBueno = new Hogar(mugre = 1, confort = 3)
     const hogarDecente = new Hogar(mugre = 1, confort = 2)
     const hogarMalo = new Hogar(mugre = 3, confort = 2)
@@ -13,6 +14,10 @@ import elementos.*
     const mascotaBuena = new Mascota(salud = 300 )
     const mascotaMala = new Mascota(salud = 100)
     const mascotaMasOMenos = new Mascota(salud = 250)
+
+    //Plagas
+    const cucarachasQueTransmiten = new Cucaracha(poblacion = 100, pesoPromedio = 10 )
+    const cucarachasQueNoTransmiten = new Cucaracha(poblacion = 100, pesoPromedio = 9)
 describe "Tests sobre hogares" {
     
     test "El hogar es bueno, ya que su nivel de mugre es menos de la mitad del confort que ofrece"{
@@ -95,5 +100,14 @@ describe "Tests sobre barrios"{
         barrio.agregarElemento(hogarMalo)
         barrio.agregarElemento(mascotaMala)
         assert.notThat(barrio.esCopado())
+    }
+}
+describe "Tests sobre plagas"{
+    test "Cucarachas transmiten enfermedades por tener un pesoPromedio de 10"{
+        assert.that(cucarachasQueTransmiten.puedeTransmitirEnfermedades() )
+    }
+
+    test "Cucarachas no transmiten enfermedades por tener un pesoPromedio de 9"{
+        assert.notThat(cucarachasQueNoTransmiten.puedeTransmitirEnfermedades() )
     }
 }
