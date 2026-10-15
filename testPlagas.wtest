@@ -111,13 +111,17 @@ describe "Tests sobre barrios"{
         assert.notThat(barrio.esCopado())
     }
 }
-describe "Tests sobre plagas"{ //faltan tests que comprueben los niveles de daño
+describe "Tests sobre plagas"{
     test "Cucarachas transmiten enfermedades por tener un pesoPromedio de 10"{
         assert.that(cucarachasQueTransmiten.puedeTransmitirEnfermedades() )
     }
 
     test "Cucarachas no transmiten enfermedades por tener un pesoPromedio de 9"{
         assert.notThat(cucarachasQueNoTransmiten.puedeTransmitirEnfermedades() )
+    }
+
+    test "Nivel de daño de las cucarachas que transmiten es 50"{
+        assert.equals(50, cucarachasQueTransmiten.nivelDeDaño() )
     }
 
     test "Pulgas transmiten enfermedades por tener un pesoPromedio de 10"{
@@ -128,6 +132,9 @@ describe "Tests sobre plagas"{ //faltan tests que comprueben los niveles de dañ
         assert.notThat(pulgasQueNoTransmiten.puedeTransmitirEnfermedades() )
     }
 
+    test "Nivel de daño de las pulgas que transmiten es 140"{
+        assert.equals(140, pulgasQueTransmiten.nivelDeDaño() )
+    }
     test "Garrapatas transmiten enfermedades por tener un pesoPromedio de 10"{
         assert.that(garrapatasQueTransmiten.puedeTransmitirEnfermedades() )
     }
@@ -136,11 +143,19 @@ describe "Tests sobre plagas"{ //faltan tests que comprueben los niveles de dañ
         assert.notThat(garrapatasQueNoTransmiten.puedeTransmitirEnfermedades() )
     } //deberia simplemente hacer esto sobre la clase plaga para no repetir tanto test??
 
+    test "Nivel de daño de las garrapatas que transmiten es 140"{
+        assert.equals(140, garrapatasQueTransmiten.nivelDeDaño() )
+    }
     test "Mosquitos transmiten enfermedades por tener un pesoPromedio de 10"{
         assert.that(mosquitosQueTransmiten.puedeTransmitirEnfermedades() )
     }
 
-    test "Mosquitos no transmiten enfermedades por tener un pesoPromedio de 9"{
+    test "Mosquitos no transmiten enfermedades por tener un pesoPromedio de 9(es multiplo de 3, pero no es mayor o igual a 10) "{
         assert.notThat(mosquitosQueNoTransmiten.puedeTransmitirEnfermedades() )
-    } 
+    }
+
+    test "Nivel de daño de las mosquitos que transmiten es 60"{
+        assert.equals(60, mosquitosQueTransmiten.nivelDeDaño() )
+    }
+ 
 }

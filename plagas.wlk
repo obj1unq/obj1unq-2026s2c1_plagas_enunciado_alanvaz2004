@@ -1,6 +1,6 @@
 class Plaga {
     var property poblacion //cantidad de bichos que la integran
-    var property pesoPromedio //debido a esto tal vez podria hacer una subclase PlagaConPeso
+    var property pesoPromedio 
 
     method nivelDeDaño()
 
