@@ -36,6 +36,11 @@ class Garrapata inherits Plaga {
 
     override method nivelDeDaño() = poblacion * 2
 
+    override method ataqueAElemento(elemento){
+        elemento.recibeAtaqueDePlaga(self)
+        poblacion = poblacion + poblacion / 5
+    }
+
 }
 
 class Mosquito inherits Plaga {

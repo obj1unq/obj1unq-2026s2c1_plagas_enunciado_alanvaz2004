@@ -217,4 +217,22 @@ describe "Test de elementos recibiendo ataques de plagas"{
         assert.equals(110, cucarachasQueTransmiten.poblacion())
         assert.equals(12, cucarachasQueTransmiten.pesoPromedio())
     }
+
+    test "Pulgas atacan hogar, aumentan su poblacion un 10%"{
+        pulgasQueTransmiten.ataqueAElemento(hogarBueno)
+        assert.equals(141, hogarBueno.mugre())
+        assert.equals(77, pulgasQueTransmiten.poblacion())
+    }
+
+    test "Garrapatas atacan hogar, aumentan su poblacion un 10%"{
+        garrapatasQueTransmiten.ataqueAElemento(hogarBueno)
+        assert.equals(141, hogarBueno.mugre())
+        assert.equals(84, garrapatasQueTransmiten.poblacion())
+    }
+
+    test "Mosquitos atacan hogar, aumentan su poblacion un 10%"{
+        mosquitosQueTransmiten.ataqueAElemento(hogarBueno)
+        assert.equals(61, hogarBueno.mugre())
+        assert.equals(66, mosquitosQueTransmiten.poblacion())
+    }
 }
