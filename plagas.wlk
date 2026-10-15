@@ -33,6 +33,6 @@ class Mosquito inherits Plaga {
     override method nivelDeDaño() = poblacion
 
     override method puedeTransmitirEnfermedades(){
-        return super() && poblacion / 3 == 0
+        return super() && poblacion % 3 == 0
     }
 }

@@ -28,7 +28,11 @@ class Huerta inherits Elemento{
     }
 
     override method recibeAtaqueDePlaga(plaga){
-        
+        if(plaga.puedeTransmitirEnfermedades()){
+            capacidadProductiva = capacidadProductiva - (plaga.nivelDeDaño() / 10) - 10 //10% de daño en bajar productividad y 10 unidades extra
+        } else{
+            capacidadProductiva = capacidadProductiva - plaga.nivelDeDaño() / 10 //10% de daño en bajar productividad
+        }
     }
 }
 

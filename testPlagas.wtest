@@ -26,7 +26,7 @@ import elementos.*
     const garrapatasQueNoTransmiten = new Garrapata(poblacion = 70, pesoPromedio = 9)
 
     const mosquitosQueTransmiten = new Mosquito(poblacion = 60, pesoPromedio = 12)
-    const mosquitosQueNoTransmiten = new Mosquito(poblacion = 60, pesoPromedio = 10) //no transmite por no ser multiplo de 3
+    const mosquitosQueNoTransmiten = new Mosquito(poblacion = 59, pesoPromedio = 10) //no transmite por no ser multiplo de 3
 describe "Tests sobre hogares" {
     
     test "El hogar es bueno, ya que su nivel de mugre es menos de la mitad del confort que ofrece"{
@@ -146,11 +146,11 @@ describe "Tests sobre plagas"{
     test "Nivel de daño de las garrapatas que transmiten es 140"{
         assert.equals(140, garrapatasQueTransmiten.nivelDeDaño() )
     }
-    test "Mosquitos transmiten enfermedades por tener un pesoPromedio de 10"{
+    test "Mosquitos transmiten enfermedades por tener un pesoPromedio de 12 y poblacion multiplo de 3"{
         assert.that(mosquitosQueTransmiten.puedeTransmitirEnfermedades() )
     }
 
-    test "Mosquitos no transmiten enfermedades por tener un pesoPromedio de 9(es multiplo de 3, pero no es mayor o igual a 10) "{
+    test "Mosquitos no transmiten enfermedades por tener un pesoPromedio de 9 aunque la poblacion si es multiplo de 3"{
         assert.notThat(mosquitosQueNoTransmiten.puedeTransmitirEnfermedades() )
     }
 
@@ -181,4 +181,13 @@ describe "Test de elementos recibiendo ataques de plagas"{
         assert.equals(61, hogarBueno.mugre() )
     }
     
+    test "Huerta recibe ataque de garrapatas que no transmiten enfermedades, lo que vuelve su capacidad productiva 136"{
+        huertaBuena.recibeAtaqueDePlaga(garrapatasQueNoTransmiten)
+        assert.equals(136, huertaBuena.capacidadProductiva() )
+    }
+
+    test "Huerta recibe ataque de mosquitos que transmiten enfermedades, lo que vuelve su capacidad productiva 134"{
+        huertaBuena.recibeAtaqueDePlaga(mosquitosQueTransmiten)
+        assert.equals(134, huertaBuena.capacidadProductiva() )
+    }
 }
