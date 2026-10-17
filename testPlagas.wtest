@@ -20,7 +20,7 @@ import elementos.*
     const cucarachasQueNoTransmiten = new Cucaracha(poblacion = 100, pesoPromedio = 9)
 
     const pulgasQueTransmiten = new Pulga(poblacion = 70, pesoPromedio = 10)
-    const pulgasQueNoTransmiten = new Pulga(poblacion = 70, pesoPromedio = 9)
+    const pulgasQueNoTransmiten = new Pulga(poblacion = 8, pesoPromedio = 9)
 
     const garrapatasQueTransmiten = new Garrapata(poblacion = 70, pesoPromedio = 10)
     const garrapatasQueNoTransmiten = new Garrapata(poblacion = 70, pesoPromedio = 9)
@@ -124,11 +124,11 @@ describe "Tests sobre plagas"{
         assert.equals(50, cucarachasQueTransmiten.nivelDeDaño() )
     }
 
-    test "Pulgas transmiten enfermedades por tener un pesoPromedio de 10"{
+    test "Pulgas transmiten enfermedades por tener una poblacion mayor a 10"{
         assert.that(pulgasQueTransmiten.puedeTransmitirEnfermedades() )
     }
 
-    test "Pulgas no transmiten enfermedades por tener un pesoPromedio de 9"{
+    test "Pulgas no transmiten enfermedades por tener una poblacion menor a 10"{
         assert.notThat(pulgasQueNoTransmiten.puedeTransmitirEnfermedades() )
     }
 

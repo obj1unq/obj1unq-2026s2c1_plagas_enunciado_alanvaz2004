@@ -5,7 +5,7 @@ class Plaga {
     method nivelDeDaño()
 
     method puedeTransmitirEnfermedades(){
-        return pesoPromedio >= 10 //la condición común para todas las plagas
+        return poblacion >= 10 //la condición común para todas las plagas
     }
     //Para que cualquier plaga transmita enfermedades, su población debe ser de al menos 10 bichos
 
@@ -22,6 +22,10 @@ class Cucaracha inherits Plaga {
     override method ataqueAElemento(elemento){
         super(elemento)
         pesoPromedio += 2
+    }
+
+    override method puedeTransmitirEnfermedades(){
+        return super() && pesoPromedio >= 10 
     }
 
 }
