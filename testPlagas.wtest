@@ -20,10 +20,10 @@ import elementos.*
     const cucarachasQueNoTransmiten = new Cucaracha(poblacion = 100, pesoPromedio = 9)
 
     const pulgasQueTransmiten = new Pulga(poblacion = 70, pesoPromedio = 10)
-    const pulgasQueNoTransmiten = new Pulga(poblacion = 8, pesoPromedio = 9)
+    const pulgasQueNoTransmiten = new Pulga(poblacion = 8, pesoPromedio = 10)
 
     const garrapatasQueTransmiten = new Garrapata(poblacion = 70, pesoPromedio = 10)
-    const garrapatasQueNoTransmiten = new Garrapata(poblacion = 70, pesoPromedio = 9)
+    const garrapatasQueNoTransmiten = new Garrapata(poblacion = 9, pesoPromedio = 10)
 
     const mosquitosQueTransmiten = new Mosquito(poblacion = 60, pesoPromedio = 12)
     const mosquitosQueNoTransmiten = new Mosquito(poblacion = 59, pesoPromedio = 10) //no transmite por no ser multiplo de 3
@@ -112,11 +112,11 @@ describe "Tests sobre barrios"{
     }
 }
 describe "Tests sobre plagas"{
-    test "Cucarachas transmiten enfermedades por tener un pesoPromedio de 10"{
+    test "Cucarachas transmiten enfermedades por tener una poblacion mayor a 10 y un pesoPromedio de 10"{
         assert.that(cucarachasQueTransmiten.puedeTransmitirEnfermedades() )
     }
 
-    test "Cucarachas no transmiten enfermedades por tener un pesoPromedio de 9"{
+    test "Cucarachas no transmiten enfermedades por tener un pesoPromedio de 9, aunque si tiene una poblacion mayor a 10"{
         assert.notThat(cucarachasQueNoTransmiten.puedeTransmitirEnfermedades() )
     }
 
@@ -135,22 +135,22 @@ describe "Tests sobre plagas"{
     test "Nivel de daño de las pulgas que transmiten es 140"{
         assert.equals(140, pulgasQueTransmiten.nivelDeDaño() )
     }
-    test "Garrapatas transmiten enfermedades por tener un pesoPromedio de 10"{
+    test "Garrapatas transmiten enfermedades por tener una poblacion mayor a 10"{
         assert.that(garrapatasQueTransmiten.puedeTransmitirEnfermedades() )
     }
 
-    test "Garrapatas no transmiten enfermedades por tener un pesoPromedio de 9"{
+    test "Garrapatas no transmiten enfermedades por tener una poblacion menor a 10"{
         assert.notThat(garrapatasQueNoTransmiten.puedeTransmitirEnfermedades() )
-    } //deberia simplemente hacer esto sobre la clase plaga para no repetir tanto test??
+    } 
 
     test "Nivel de daño de las garrapatas que transmiten es 140"{
         assert.equals(140, garrapatasQueTransmiten.nivelDeDaño() )
     }
-    test "Mosquitos transmiten enfermedades por tener un pesoPromedio de 12 y poblacion multiplo de 3"{
+    test "Mosquitos transmiten enfermedades por tener una poblacion mayor a 10 y que es multiplo de 3"{
         assert.that(mosquitosQueTransmiten.puedeTransmitirEnfermedades() )
     }
 
-    test "Mosquitos no transmiten enfermedades por tener un pesoPromedio de 9 aunque la poblacion si es multiplo de 3"{
+    test "Mosquitos no transmiten enfermedades por que la poblacion no es multiplo de 3, aunque si es mayor a 10"{
         assert.notThat(mosquitosQueNoTransmiten.puedeTransmitirEnfermedades() )
     }
 
@@ -181,9 +181,9 @@ describe "Test de elementos recibiendo ataques de plagas"{
         assert.equals(61, hogarBueno.mugre() )
     }
     
-    test "Huerta recibe ataque de garrapatas que no transmiten enfermedades, lo que vuelve su capacidad productiva 136"{
+    test "Huerta recibe ataque de garrapatas que no transmiten enfermedades, lo que vuelve su capacidad productiva 148.2"{
         huertaBuena.recibeAtaqueDePlaga(garrapatasQueNoTransmiten)
-        assert.equals(136, huertaBuena.capacidadProductiva() )
+        assert.equals(148.2, huertaBuena.capacidadProductiva() ) 
     }
 
     test "Huerta recibe ataque de garrapatas que transmiten enfermedades, lo que vuelve su capacidad productiva 126"{
