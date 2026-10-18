@@ -238,7 +238,36 @@ describe "Test de elementos recibiendo ataques de plagas"{
         mascotaBuena.recibeAtaqueDePlaga(pulgasQueNoTransmiten)
         assert.equals(300, mascotaBuena.salud())
     }
-    //Faltan garrapatas, cucarachas y mosquitos
+
+    test "Mascota recibe ataque de garrapatas que transmiten enfermedades"{
+        mascotaBuena.recibeAtaqueDePlaga(garrapatasQueTransmiten)
+        assert.equals(160, mascotaBuena.salud())
+    }
+
+    test "Mascota recibe ataque de garrapatas que no transmiten enfermedades"{
+        mascotaBuena.recibeAtaqueDePlaga(garrapatasQueNoTransmiten)
+        assert.equals(300, mascotaBuena.salud())
+    }
+
+    test "Mascota recibe ataque de cucarachas que transmiten enfermedades"{
+        mascotaBuena.recibeAtaqueDePlaga(cucarachasQueTransmiten)
+        assert.equals(250, mascotaBuena.salud())
+    }
+
+    test "Mascota recibe ataque de cucarachas que no transmiten enfermedades"{
+        mascotaBuena.recibeAtaqueDePlaga(cucarachasQueNoTransmiten)
+        assert.equals(300, mascotaBuena.salud())
+    }
+
+    test "Mascota recibe ataque de mosquitos que transmiten enfermedades"{
+        mascotaBuena.recibeAtaqueDePlaga(mosquitosQueTransmiten)
+        assert.equals(240, mascotaBuena.salud())
+    }
+
+    test "Mascota recibe ataque de mosquitos que no transmiten enfermedades"{
+        mascotaBuena.recibeAtaqueDePlaga(mosquitosQueNoTransmiten)
+        assert.equals(300, mascotaBuena.salud())
+    }
 }
 
 describe "Tests de plagas atacando elementos"{
