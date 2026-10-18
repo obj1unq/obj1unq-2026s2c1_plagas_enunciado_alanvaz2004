@@ -1,0 +1,298 @@
+import plagas.*
+import elementos.*
+
+    //Elementos
+    const hogarBueno = new Hogar(mugre = 1, confort = 3)
+    const hogarDecente = new Hogar(mugre = 1, confort = 2)
+    const hogarMalo = new Hogar(mugre = 3, confort = 2)
+    const hogarMasOMenos = new Hogar(mugre = 2, confort = 2)
+
+    const huertaBuena = new Huerta(capacidadProductiva = 150, nivelDeProduccion = 120)
+    const huertaMala = new Huerta(capacidadProductiva = 100, nivelDeProduccion = 120)
+    const huertaMasOMenos = new Huerta(capacidadProductiva = 120, nivelDeProduccion = 120)
+
+    const mascotaBuena = new Mascota(salud = 300 )
+    const mascotaMala = new Mascota(salud = 100)
+    const mascotaMasOMenos = new Mascota(salud = 250)
+
+    //Plagas
+    const cucarachasQueTransmiten = new Cucaracha(poblacion = 100, pesoPromedio = 10 )
+    const cucarachasQueNoTransmiten = new Cucaracha(poblacion = 100, pesoPromedio = 9)
+
+    const pulgasQueTransmiten = new Pulga(poblacion = 70, pesoPromedio = 10)
+    const pulgasQueNoTransmiten = new Pulga(poblacion = 8, pesoPromedio = 10)
+
+    const garrapatasQueTransmiten = new Garrapata(poblacion = 70, pesoPromedio = 10)
+    const garrapatasQueNoTransmiten = new Garrapata(poblacion = 9, pesoPromedio = 10)
+
+    const mosquitosQueTransmiten = new Mosquito(poblacion = 60, pesoPromedio = 12)
+    const mosquitosQueNoTransmiten = new Mosquito(poblacion = 59, pesoPromedio = 10) //no transmite por no ser multiplo de 3
+describe "Tests sobre hogares" {
+    
+    test "El hogar es bueno, ya que su nivel de mugre es menos de la mitad del confort que ofrece"{
+        assert.that(hogarBueno.esBueno())
+    }
+
+    test "El hogar es bueno, ya que su nivel de mugre es la mitad del confort que ofrece"{
+        assert.that(hogarDecente.esBueno())
+    }
+
+    test "El hogar es malo, ya que su nivel de mugre es mas de la mitad del confort que ofrece"{
+        assert.notThat(hogarMalo.esBueno())
+    }
+
+    test "El hogar es malo, ya que su nivel de mugre es igual que el confort que ofrece"{
+        assert.notThat(hogarMasOMenos.esBueno())
+    }
+}
+
+describe "Tests sobre huertas"{
+    
+    test "La huerta es buena, ya que su capacidad de producción supera el nivel de produccion que se espera de todas las huertas"{
+        assert.that(huertaBuena.esBueno())
+    }
+
+    test "La huerta es mala, ya que su capacidad de producción es inferior a el nivel de produccion que se espera de todas las huertas"{
+        assert.notThat(huertaMala.esBueno())
+    }
+
+    test "La huerta es mala, ya que su capacidad de producción es igual a el nivel de produccion que se espera de todas las huertas"{
+        assert.notThat(huertaMasOMenos.esBueno())
+    }
+}
+
+describe "Tests sobre mascotas"{
+    
+    test "La mascota es buena, ya que su salud supera las 250 unidades"{
+        assert.that(mascotaBuena.esBueno())
+    }
+
+    test "La mascota es mala, ya que su salud es inferior a 250 unidades"{
+        assert.notThat(mascotaMala.esBueno())
+    }
+
+    test "La mascota es mala, ya que su salud es de 250 unidades"{
+        assert.notThat(mascotaMasOMenos.esBueno())
+    }
+}
+
+describe "Tests sobre barrios"{
+    const barrio = new Barrio()
+    
+    test "El barrio es copado, ya que hay mas elementos buenos(4) que no-buenos(3) "{
+        barrio.agregarElemento(hogarBueno)
+        barrio.agregarElemento(huertaBuena)
+        barrio.agregarElemento(hogarDecente)
+        barrio.agregarElemento(mascotaBuena)
+        barrio.agregarElemento(huertaMala)
+        barrio.agregarElemento(hogarMalo)
+        barrio.agregarElemento(mascotaMala)
+        assert.that(barrio.esCopado())
+    }
+
+    test "El barrio no es copado, ya que hay menos elementos buenos(3) que no-buenos(4) "{
+        barrio.agregarElemento(hogarBueno)
+        barrio.agregarElemento(huertaBuena)
+        barrio.agregarElemento(mascotaBuena)
+        barrio.agregarElemento(huertaMala)
+        barrio.agregarElemento(hogarMalo)
+        barrio.agregarElemento(mascotaMala)
+        barrio.agregarElemento(mascotaMala)
+        assert.notThat(barrio.esCopado())
+    }
+
+    test "El barrio no es copado, ya que hay igual de elementos buenos(3) que no-buenos(3) "{
+        barrio.agregarElemento(hogarBueno)
+        barrio.agregarElemento(huertaBuena)
+        barrio.agregarElemento(mascotaBuena)
+        barrio.agregarElemento(huertaMala)
+        barrio.agregarElemento(hogarMalo)
+        barrio.agregarElemento(mascotaMala)
+        assert.notThat(barrio.esCopado())
+    }
+}
+describe "Tests sobre plagas"{
+    //Cucarachas
+    test "Cucarachas transmiten enfermedades por tener una poblacion mayor a 10 y un pesoPromedio de 10"{
+        assert.that(cucarachasQueTransmiten.puedeTransmitirEnfermedades() )
+    }
+
+    test "Cucarachas no transmiten enfermedades por tener un pesoPromedio de 9, aunque si tiene una poblacion mayor a 10"{
+        assert.notThat(cucarachasQueNoTransmiten.puedeTransmitirEnfermedades() )
+    }
+
+    test "Nivel de daño de las cucarachas que transmiten es 50"{
+        assert.equals(50, cucarachasQueTransmiten.nivelDeDaño() )
+    }
+    //Pulgas
+    test "Pulgas transmiten enfermedades por tener una poblacion mayor a 10"{
+        assert.that(pulgasQueTransmiten.puedeTransmitirEnfermedades() )
+    }
+
+    test "Pulgas no transmiten enfermedades por tener una poblacion menor a 10"{
+        assert.notThat(pulgasQueNoTransmiten.puedeTransmitirEnfermedades() )
+    }
+
+    test "Nivel de daño de las pulgas que transmiten es 140"{
+        assert.equals(140, pulgasQueTransmiten.nivelDeDaño() )
+    }
+
+    test "Nivel de daño de las pulgas que no transmiten es"{
+        assert.equals(16, pulgasQueNoTransmiten.nivelDeDaño() )
+    }
+    //Garrapatas
+    test "Garrapatas transmiten enfermedades por tener una poblacion mayor a 10"{
+        assert.that(garrapatasQueTransmiten.puedeTransmitirEnfermedades() )
+    }
+
+    test "Garrapatas no transmiten enfermedades por tener una poblacion menor a 10"{
+        assert.notThat(garrapatasQueNoTransmiten.puedeTransmitirEnfermedades() )
+    } 
+
+    test "Nivel de daño de las garrapatas que transmiten es 140"{
+        assert.equals(140, garrapatasQueTransmiten.nivelDeDaño() )
+    }
+    //Mosquitos
+    test "Mosquitos transmiten enfermedades por tener una poblacion mayor a 10 y que es multiplo de 3"{
+        assert.that(mosquitosQueTransmiten.puedeTransmitirEnfermedades() )
+    }
+
+    test "Mosquitos no transmiten enfermedades por que la poblacion no es multiplo de 3, aunque si es mayor a 10"{
+        assert.notThat(mosquitosQueNoTransmiten.puedeTransmitirEnfermedades() )
+    }
+
+    test "Nivel de daño de las mosquitos que transmiten es 60"{
+        assert.equals(60, mosquitosQueTransmiten.nivelDeDaño() )
+    }
+ 
+}
+
+describe "Test de elementos recibiendo ataques de plagas"{
+    //Hogar
+    test "Hogar recibe ataque de cucarachas, lo que vuelve su nivel de mugre 51"{
+        hogarBueno.recibeAtaqueDePlaga(cucarachasQueTransmiten)
+        assert.equals(51, hogarBueno.mugre() )
+    }
+
+    test "Hogar recibe ataque de pulgas, lo que vuelve su nivel de mugre 51"{
+        hogarBueno.recibeAtaqueDePlaga(pulgasQueTransmiten)
+        assert.equals(141, hogarBueno.mugre() )
+    }
+
+    test "Hogar recibe ataque de garrapatas, lo que vuelve su nivel de mugre 51"{
+        hogarBueno.recibeAtaqueDePlaga(garrapatasQueTransmiten)
+        assert.equals(141, hogarBueno.mugre() )
+    }
+
+    test "Hogar recibe ataque de mosquitos, lo que vuelve su nivel de mugre 51"{
+        hogarBueno.recibeAtaqueDePlaga(mosquitosQueTransmiten)
+        assert.equals(61, hogarBueno.mugre() )
+    }
+    //Huerta
+    test "Huerta recibe ataque de garrapatas que no transmiten enfermedades, lo que vuelve su capacidad productiva 148.2"{
+        huertaBuena.recibeAtaqueDePlaga(garrapatasQueNoTransmiten)
+        assert.equals(148.2, huertaBuena.capacidadProductiva() ) 
+    }
+
+    test "Huerta recibe ataque de garrapatas que transmiten enfermedades, lo que vuelve su capacidad productiva 126"{
+        huertaBuena.recibeAtaqueDePlaga(garrapatasQueTransmiten)
+        assert.equals(126, huertaBuena.capacidadProductiva() )
+    }
+
+    test "Huerta recibe ataque de mosquitos que transmiten enfermedades, lo que vuelve su capacidad productiva 134"{
+        huertaBuena.recibeAtaqueDePlaga(mosquitosQueTransmiten)
+        assert.equals(134, huertaBuena.capacidadProductiva() )
+    }
+
+    test "Huerta recibe ataque de mosquitos que no transmiten enfermedades, lo que vuelve su capacidad productiva 144"{
+        huertaBuena.recibeAtaqueDePlaga(mosquitosQueNoTransmiten)
+        assert.equals(144.1, huertaBuena.capacidadProductiva() ) //da 144.1 debido a que la poblacion es 59
+    }
+
+    test "Huerta recibe ataque de cucarachas que transmiten enfermedades, lo que vuelve su capacidad productiva 135"{
+        huertaBuena.recibeAtaqueDePlaga(cucarachasQueTransmiten)
+        assert.equals(135, huertaBuena.capacidadProductiva() )
+    }
+
+    test "Huerta recibe ataque de cucarachas que no transmiten enfermedades, lo que vuelve su capacidad productiva 145"{
+        huertaBuena.recibeAtaqueDePlaga(cucarachasQueNoTransmiten)
+        assert.equals(145, huertaBuena.capacidadProductiva() )
+    }
+
+    test "Huerta recibe ataque de pulgas que transmiten enfermedades, lo que vuelve su capacidad productiva 135"{
+        huertaBuena.recibeAtaqueDePlaga(pulgasQueTransmiten)
+        assert.equals(126, huertaBuena.capacidadProductiva() )
+    }
+
+    test "Huerta recibe ataque de pulgas que no transmiten enfermedades, lo que vuelve su capacidad productiva 135"{
+        huertaBuena.recibeAtaqueDePlaga(pulgasQueNoTransmiten)
+        assert.equals(148.4, huertaBuena.capacidadProductiva() ) //ya que el nivel de daño de las pulgas que no transmiten es 16
+    }
+    //Mascota
+    test "Mascota recibe ataque de pulgas que transmiten enfermedades"{
+        mascotaBuena.recibeAtaqueDePlaga(pulgasQueTransmiten)
+        assert.equals(160, mascotaBuena.salud())
+    }
+
+    test "Mascota recibe ataque de pulgas que no transmiten enfermedades(su vida queda igual)"{
+        mascotaBuena.recibeAtaqueDePlaga(pulgasQueNoTransmiten)
+        assert.equals(300, mascotaBuena.salud())
+    }
+
+    test "Mascota recibe ataque de garrapatas que transmiten enfermedades"{
+        mascotaBuena.recibeAtaqueDePlaga(garrapatasQueTransmiten)
+        assert.equals(160, mascotaBuena.salud())
+    }
+
+    test "Mascota recibe ataque de garrapatas que no transmiten enfermedades"{
+        mascotaBuena.recibeAtaqueDePlaga(garrapatasQueNoTransmiten)
+        assert.equals(300, mascotaBuena.salud())
+    }
+
+    test "Mascota recibe ataque de cucarachas que transmiten enfermedades"{
+        mascotaBuena.recibeAtaqueDePlaga(cucarachasQueTransmiten)
+        assert.equals(250, mascotaBuena.salud())
+    }
+
+    test "Mascota recibe ataque de cucarachas que no transmiten enfermedades"{
+        mascotaBuena.recibeAtaqueDePlaga(cucarachasQueNoTransmiten)
+        assert.equals(300, mascotaBuena.salud())
+    }
+
+    test "Mascota recibe ataque de mosquitos que transmiten enfermedades"{
+        mascotaBuena.recibeAtaqueDePlaga(mosquitosQueTransmiten)
+        assert.equals(240, mascotaBuena.salud())
+    }
+
+    test "Mascota recibe ataque de mosquitos que no transmiten enfermedades"{
+        mascotaBuena.recibeAtaqueDePlaga(mosquitosQueNoTransmiten)
+        assert.equals(300, mascotaBuena.salud())
+    }
+}
+
+describe "Tests de plagas atacando elementos"{
+    test "Cucarachas atacan hogar, aumentan su poblacion un 10% y peso promedio en 2"{
+        cucarachasQueTransmiten.ataqueAElemento(hogarBueno)
+        assert.equals(51, hogarBueno.mugre())
+        assert.equals(110, cucarachasQueTransmiten.poblacion())
+        assert.equals(12, cucarachasQueTransmiten.pesoPromedio())
+    }
+
+    test "Pulgas atacan hogar, aumentan su poblacion un 10%"{
+        pulgasQueTransmiten.ataqueAElemento(hogarBueno)
+        assert.equals(141, hogarBueno.mugre())
+        assert.equals(77, pulgasQueTransmiten.poblacion())
+    }
+
+    test "Garrapatas atacan hogar, aumentan su poblacion un 20%"{
+        garrapatasQueTransmiten.ataqueAElemento(hogarBueno)
+        assert.equals(141, hogarBueno.mugre())
+        assert.equals(84, garrapatasQueTransmiten.poblacion())
+    }
+
+    test "Mosquitos atacan hogar, aumentan su poblacion un 10%"{
+        mosquitosQueTransmiten.ataqueAElemento(hogarBueno)
+        assert.equals(61, hogarBueno.mugre())
+        assert.equals(66, mosquitosQueTransmiten.poblacion())
+    }
+}
