@@ -112,6 +112,7 @@ describe "Tests sobre barrios"{
     }
 }
 describe "Tests sobre plagas"{
+    //Cucarachas
     test "Cucarachas transmiten enfermedades por tener una poblacion mayor a 10 y un pesoPromedio de 10"{
         assert.that(cucarachasQueTransmiten.puedeTransmitirEnfermedades() )
     }
@@ -123,7 +124,7 @@ describe "Tests sobre plagas"{
     test "Nivel de daño de las cucarachas que transmiten es 50"{
         assert.equals(50, cucarachasQueTransmiten.nivelDeDaño() )
     }
-
+    //Pulgas
     test "Pulgas transmiten enfermedades por tener una poblacion mayor a 10"{
         assert.that(pulgasQueTransmiten.puedeTransmitirEnfermedades() )
     }
@@ -135,6 +136,11 @@ describe "Tests sobre plagas"{
     test "Nivel de daño de las pulgas que transmiten es 140"{
         assert.equals(140, pulgasQueTransmiten.nivelDeDaño() )
     }
+
+    test "Nivel de daño de las pulgas que no transmiten es"{
+        assert.equals(16, pulgasQueNoTransmiten.nivelDeDaño() )
+    }
+    //Garrapatas
     test "Garrapatas transmiten enfermedades por tener una poblacion mayor a 10"{
         assert.that(garrapatasQueTransmiten.puedeTransmitirEnfermedades() )
     }
@@ -146,6 +152,7 @@ describe "Tests sobre plagas"{
     test "Nivel de daño de las garrapatas que transmiten es 140"{
         assert.equals(140, garrapatasQueTransmiten.nivelDeDaño() )
     }
+    //Mosquitos
     test "Mosquitos transmiten enfermedades por tener una poblacion mayor a 10 y que es multiplo de 3"{
         assert.that(mosquitosQueTransmiten.puedeTransmitirEnfermedades() )
     }
@@ -161,6 +168,7 @@ describe "Tests sobre plagas"{
 }
 
 describe "Test de elementos recibiendo ataques de plagas"{
+    //Hogar
     test "Hogar recibe ataque de cucarachas, lo que vuelve su nivel de mugre 51"{
         hogarBueno.recibeAtaqueDePlaga(cucarachasQueTransmiten)
         assert.equals(51, hogarBueno.mugre() )
@@ -180,7 +188,7 @@ describe "Test de elementos recibiendo ataques de plagas"{
         hogarBueno.recibeAtaqueDePlaga(mosquitosQueTransmiten)
         assert.equals(61, hogarBueno.mugre() )
     }
-    
+    //Huerta
     test "Huerta recibe ataque de garrapatas que no transmiten enfermedades, lo que vuelve su capacidad productiva 148.2"{
         huertaBuena.recibeAtaqueDePlaga(garrapatasQueNoTransmiten)
         assert.equals(148.2, huertaBuena.capacidadProductiva() ) 
@@ -201,6 +209,26 @@ describe "Test de elementos recibiendo ataques de plagas"{
         assert.equals(144.1, huertaBuena.capacidadProductiva() ) //da 144.1 debido a que la poblacion es 59
     }
 
+    test "Huerta recibe ataque de cucarachas que transmiten enfermedades, lo que vuelve su capacidad productiva 135"{
+        huertaBuena.recibeAtaqueDePlaga(cucarachasQueTransmiten)
+        assert.equals(135, huertaBuena.capacidadProductiva() )
+    }
+
+    test "Huerta recibe ataque de cucarachas que no transmiten enfermedades, lo que vuelve su capacidad productiva 145"{
+        huertaBuena.recibeAtaqueDePlaga(cucarachasQueNoTransmiten)
+        assert.equals(145, huertaBuena.capacidadProductiva() )
+    }
+
+    test "Huerta recibe ataque de pulgas que transmiten enfermedades, lo que vuelve su capacidad productiva 135"{
+        huertaBuena.recibeAtaqueDePlaga(pulgasQueTransmiten)
+        assert.equals(126, huertaBuena.capacidadProductiva() )
+    }
+
+    test "Huerta recibe ataque de pulgas que no transmiten enfermedades, lo que vuelve su capacidad productiva 135"{
+        huertaBuena.recibeAtaqueDePlaga(pulgasQueNoTransmiten)
+        assert.equals(148.4, huertaBuena.capacidadProductiva() ) //ya que el nivel de daño de las pulgas que no transmiten es 16
+    }
+    //Mascota
     test "Mascota recibe ataque de pulgas que transmiten enfermedades"{
         mascotaBuena.recibeAtaqueDePlaga(pulgasQueTransmiten)
         assert.equals(160, mascotaBuena.salud())
@@ -210,7 +238,10 @@ describe "Test de elementos recibiendo ataques de plagas"{
         mascotaBuena.recibeAtaqueDePlaga(pulgasQueNoTransmiten)
         assert.equals(300, mascotaBuena.salud())
     }
+    //Faltan garrapatas, cucarachas y mosquitos
+}
 
+describe "Tests de plagas atacando elementos"{
     test "Cucarachas atacan hogar, aumentan su poblacion un 10% y peso promedio en 2"{
         cucarachasQueTransmiten.ataqueAElemento(hogarBueno)
         assert.equals(51, hogarBueno.mugre())
@@ -224,7 +255,7 @@ describe "Test de elementos recibiendo ataques de plagas"{
         assert.equals(77, pulgasQueTransmiten.poblacion())
     }
 
-    test "Garrapatas atacan hogar, aumentan su poblacion un 10%"{
+    test "Garrapatas atacan hogar, aumentan su poblacion un 20%"{
         garrapatasQueTransmiten.ataqueAElemento(hogarBueno)
         assert.equals(141, hogarBueno.mugre())
         assert.equals(84, garrapatasQueTransmiten.poblacion())
